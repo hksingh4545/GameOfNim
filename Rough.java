@@ -245,7 +245,7 @@ public class Rough {
 						int numChoiceB = rnd.nextInt(sizeB) + 1;
                                                 for (int i=0;i<numChoiceB;i++)
                                                 {
-                                                    l2[j].setIcon(ic11);
+                                                    l2[k].setIcon(ic11);
                                                     k++;
                                                 }
 			//			pileB.remove(numChoiceB);
@@ -503,11 +503,13 @@ public class Rough {
     
     
     
-    for(int u=0;u<4;u++){
+    for(int u=0;u<3;u++){
         f.add(p[u]);
     }
     f.setBackground(Color.green);
-    f.add(b1);f.add(b2);f.add(b3);f.add(b4);f.add(b5);
+    f.add(b1);f.add(b2);f.add(b3);
+   // f.add(b4);
+    f.add(b5);
     f.setSize(800, 800);
     f.setLayout(null);
     f.setVisible(true);
