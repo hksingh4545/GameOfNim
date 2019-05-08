@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package rough;
 
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -14,6 +13,7 @@ import java.util.Random;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 public class Rough {
     int j=0,k=0,x=0,m=0;
 
-    JFrame f = new JFrame(" Rough ");
+    JFrame f = new JFrame(" Game Of NIM ");
     JPanel[] p =new JPanel[4];
     int[] a = new int[4];
     
@@ -33,11 +33,11 @@ public class Rough {
     private Random rnd = new Random();
 
     JLabel[] l1,l2,l3,l4;
-    JButton b1 = new JButton("rough");
-    JButton b2 = new JButton("rough");
-    JButton b3 = new JButton("rough");
-    JButton b4 = new JButton("rough");
-    JButton b5 = new JButton("rough bot");
+    JButton b1 = new JButton("Pile 1");
+    JButton b2 = new JButton("Pile 2");
+    JButton b3 = new JButton("Pile 3");
+    JButton b4 = new JButton("Help");
+    JButton b5 = new JButton("PC Move");
     Rough(){
     for(int po=0 ; po<4 ; po++)
     {a[po] = (int )(Math.random() * 5 + 1);}
@@ -51,11 +51,11 @@ public class Rough {
     }
         
         
-    b1.setBounds(600, 10, 80, 30);
-    b2.setBounds(600, 60, 80, 30);
-    b3.setBounds(600, 110, 80, 30);
-    b4.setBounds(600, 160, 80, 30);
-    b5.setBounds(600, 250, 80, 30);
+    b1.setBounds(600, 15, 80, 30);
+    b2.setBounds(600, 75, 80, 30);
+    b3.setBounds(600, 140, 80, 30);
+    b4.setBounds(300, 200, 80, 30);
+    b5.setBounds(600, 200, 100, 30);
     
     
     p[0].setBounds(5, 5,500,50); 
@@ -74,6 +74,8 @@ public class Rough {
     
     Icon ic11=new ImageIcon("/home/hksingh4343/Documents/1.jpg"); 
     Icon pic=new ImageIcon("/home/hksingh4343/Documents/matcho1.gif");
+    
+    f.setBackground(Color.green);
     //l.setIcon(ic11);
     
     for(int i=0;i<a[0];i++){
@@ -112,9 +114,29 @@ public class Rough {
             l1[j].setIcon(ic11);
             b2.setEnabled(false);
             b3.setEnabled(false);
-            b4.setEnabled(false);
-            j++;        
+            //b4.setEnabled(false);
+            j++;    
+            if((a[0]+a[1]+a[2]-j-k-x)==0){JDialog d = new JDialog(f, "Result"); 
+  
+            // create a label 
+            JLabel l = new JLabel("  Sorry, You Loose!!!"); 
+  
+            d.add(l); 
+  
+            // setsize of dialog 
+            d.setBounds(300, 300, 200, 100);
+            //d.setLayout(null);
+            // set visibility of dialog 
+            d.setVisible(true);
+            b5.setEnabled(false); //ending disable
+        
+    }else{
+            b5.setEnabled(true);}
+            if((a[0]-j)==0){
+        b1.setEnabled(false);
+    }
     }  
+    
     });
     
     b2.addActionListener(new ActionListener(){  
@@ -122,9 +144,29 @@ public class Rough {
             l2[k].setIcon(ic11);
             b1.setEnabled(false);
             b3.setEnabled(false);
-            b4.setEnabled(false);
+            //b4.setEnabled(false);
             k++;        
+            if((a[0]+a[1]+a[2]-j-k-x)==0){JDialog d = new JDialog(f, "Result"); 
+  
+            // create a label 
+            JLabel l = new JLabel("Sorry, You Loose!!!"); 
+  
+            d.add(l); 
+  
+            // setsize of dialog 
+            d.setBounds(300, 300, 200, 100); 
+            //d.setLayout(null); 
+  
+            // set visibility of dialog 
+            d.setVisible(true);
+            b5.setEnabled(false);
+        
+    }else{
+            b5.setEnabled(true);            
     }  
+            if((a[1]-k)==0){
+        b2.setEnabled(false);
+    }}
     });
     
     b3.addActionListener(new ActionListener(){  
@@ -132,28 +174,70 @@ public class Rough {
             l3[x].setIcon(ic11);
             b2.setEnabled(false);
             b1.setEnabled(false);
-            b4.setEnabled(false);
-            x++;        
+            //4.setEnabled(false);
+            x++;    
+            if((a[0]+a[1]+a[2]-j-k-x)==0){JDialog d = new JDialog(f, "Result"); 
+  
+            // create a label 
+            JLabel l = new JLabel("Sorry, You Loose!!!"); 
+  
+            d.add(l); 
+  
+            // setsize of dialog 
+            d.setBounds(300, 300, 200, 100);
+            //d.setLayout(null);
+  
+            // set visibility of dialog 
+            d.setVisible(true);
+            b5.setEnabled(false); //using to end b5 button at the end
+        
+    }else{
+            b5.setEnabled(true);
+            
+            }
+            if((a[2]-x)==0){
+        b3.setEnabled(false);
+            
     }  
-    });
+    }});
+    
     
     b4.addActionListener(new ActionListener(){  
     public void actionPerformed(ActionEvent e){  
-            l4[m].setIcon(ic11);
-            b2.setEnabled(false);
-            b3.setEnabled(false);
-            b1.setEnabled(false);
-            m++;        
+              JDialog d = new JDialog(f, "Help"); 
+               String myString = 
+    "<html><p>   In one move, you can remove any number of matches but only from one row.  " + 
+    "  Select any 'Row button' and click it to REMOVE matches. After each move click   " +
+    "  'PC move' to make the computer play. You win if you leave the LAST match for  " +
+    "                      the computer." +
+                       "  Who Moves First</p>"+
+                       "  At the start of a game, you have the first move, unless you allow the computer "+
+                       "  to play first by pressing the 'PC move' button.</html>";
+            // create a label 
+            JLabel l = new JLabel(myString); 
+            //JLabel l1= new JLabel(" Select any 'Row button' and click it to REMOVE matches.");
+            d.add(l); 
+            // setsize of dialog 
+            d.setSize(700, 200); 
+            //d.setLayout(null);
+  
+            // set visibility of dialog 
+            d.setVisible(true);
     }  
     });
     b5.addActionListener(new ActionListener(){  
     public void actionPerformed(ActionEvent e){  
-           b2.setEnabled(true);
-            b3.setEnabled(true);
-            b1.setEnabled(true);
+        
+           
+            
             int sizeA = a[0]-j;	//Returns the value of pile A and stores it into an integer
 		int sizeB = a[1]-k;	//Returns the value of pile B and stores it into an integer
 		int sizeC = a[2]-x;	//Returns the value of pile C and stores it into an integer
+                
+                
+                
+                
+                
 		int nimOfPiles = sizeA ^ sizeB ^ sizeC;	//Calculates the nim-sum of all 3 piles
 		int amtTaken;	//Declares an integer to store the value of the computer's choice
 		
@@ -495,8 +579,44 @@ public class Rough {
 				//pileC.remove(amtTaken);
 				System.out.print("\nThe computer removed " + amtTaken + " from pile C");	
 			}
-		}	
-	}        
+		}
+                sizeA = a[0]-j;	//Returns the value of pile A and stores it into an integer
+		sizeB = a[1]-k;	//Returns the value of pile B and stores it into an integer
+		sizeC = a[2]-x;
+                
+                if(sizeA!=0){
+                    b1.setEnabled(true);
+                }
+                if(sizeB!=0){
+                    b2.setEnabled(true);
+                }
+                if(sizeC!=0){
+                    System.out.println("HK"+sizeC);
+                    b3.setEnabled(true);
+                }
+                if((sizeA+sizeB+sizeC)==0){JDialog d = new JDialog(f, "Result"); 
+  
+            // create a label 
+            JLabel l = new JLabel("Sorry, You Win!!!"); 
+  
+            d.add(l); 
+  
+            // setsize of dialog 
+            d.setBounds(300, 300, 200, 100); 
+            //d.setLayout(null); 
+  
+            // set visibility of dialog 
+            d.setVisible(true);
+        
+    }
+
+                    
+                
+                
+                
+                b5.setEnabled(false);
+	}  
+        
     }  
     );
 
@@ -506,14 +626,17 @@ public class Rough {
     for(int u=0;u<3;u++){
         f.add(p[u]);
     }
-    f.setBackground(Color.green);
+    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    f.setBackground(Color.yellow);
+  
     f.add(b1);f.add(b2);f.add(b3);
-   // f.add(b4);
+    f.add(b4);
     f.add(b5);
     f.setSize(800, 800);
+    //f.pack();
     f.setLayout(null);
     f.setVisible(true);
-    f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    
     }
     public static void main(String[] args) {
         new Rough();
