@@ -597,7 +597,7 @@ public class Rough {
                 if((sizeA+sizeB+sizeC)==0){JDialog d = new JDialog(f, "Result"); 
   
             // create a label 
-            JLabel l = new JLabel("Sorry, You Win!!!"); 
+            JLabel l = new JLabel("You Win!!!"); 
   
             d.add(l); 
   
